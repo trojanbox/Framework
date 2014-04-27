@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html" charset="utf-8" />
+        <link type="text/css" rel="stylesheet" href="<?=WEB_APPLICATION_PUBLIC?>css/adminGroupList.css" />
+        <link type="text/css" rel="stylesheet" href="<?=WEB_APPLICATION_PUBLIC?>css/adminPublic.css" />
+        <script type="text/javascript" src='<?=WEB_APPLICATION_PUBLIC?>js/compatibility.js'></script>
+        <script type="text/javascript" src="<?=WEB_APPLICATION_PUBLIC?>js/jquery-2.0.2.min.js"></script>
+        <script type="text/javascript" src="<?=WEB_APPLICATION_PUBLIC?>js/editgroup.js"></script>
+    </head>
+    <body>
+        <div style="font-weight: bold;margin:20px 0 0 20px;font-size:23px;color:#3D3D3D;">创建基本归档<span style="margin-left:10px;font-size:12px;color:#3D3D3D;">创建编辑您的归档并文章置入其中。</span></div>
+    	<div class='publicFramework'>
+    		<input type='hidden' name='id' id='id' value='<?=$this->groupInfo['id']?>'>
+	    	<table class='publicTable'>
+	    		<tr>
+	    			<td>归档分级(*)</td>
+	    			<td>
+						<select class='publicSelect' id='publicSelect'>
+							<option value='0'>根</option>
+							<? if (!empty($this->groupTreeLists)): ?>
+								<? foreach ($this->groupTreeLists as $value): ?>
+								<option value="<?=$value['id']?>">
+									<? for ($i = 0; $i <= $value['_floor_']; $i++): ?>&nbsp;&nbsp;<? endfor; ?>
+									<?=$value['name']?>
+								</option>
+								<? endforeach; ?>
+							<? endif; ?>
+						</select>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>归档名称(*)</td>
+	    			<td><input id='publicName' type='text'  value='<?=$this->groupInfo['name']?>'></td>
+	    		</tr>
+	    		<tr>
+	    			<td>归档关键字</td>
+	    			<td><input id='publicKey' type='text'  value='<?=$this->groupInfo['key']?>'></td>
+	    		</tr>
+	    		<tr>
+	    			<td>归档描述</td>
+	    			<td><input id='publicDescription' type='text'  value='<?=$this->groupInfo['description']?>'></td>
+	    		</tr>
+	    	</table>
+	    	<input type='submit' id='submit' value='提交'>
+	    	<span id='message'></span>
+	    	<div style='clear: both;'></div>
+    	</div>
+    	<div style="font-weight: bold;margin:20px 0 0 20px;font-size:23px;color:#3D3D3D;">创建自动归档<span style="margin-left:10px;font-size:12px;color:#3D3D3D;">创建自动归档规则。</span></div>
+    </body>
+</html>

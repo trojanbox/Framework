@@ -1,0 +1,82 @@
+<? if (!empty($this->manage)): ?>
+<div class='bodyMainRight'>
+	<div class='bodyMLTitle'>
+		<div class='bodyMLTitleF'>操作</div>
+	</div>
+	<div class='bodyMainRightContent'>
+		<!-- 热门关键词 -->
+		<div class='bodyMRCDiv'>
+			<div class='bodyMRCDTitle'>
+				<div class='bodyMRCDTitleF'>热门关键词</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMRCDContent'>等待开通</div>
+			<div class='bodyMLTCDCSeparator'></div>
+		</div>
+		<!-- 分类 -->
+		<div class='bodyMRCDiv'>
+			<div class='bodyMRCDTitle'>
+				<div class='bodyMRCDTitleF'>分类</div>
+				<div class='bodyMRCDTManage'><font style='color:#00abdc;'>自定义</font>&nbsp;日期</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMRCDContent'>
+				<ul>
+					<?foreach($this->_groupLists as $key => $value):?>
+						<li><a href="/lists/<?=$value['id']?>.html"><?=$value['name']?></a></li>
+					<?endforeach;?>
+				</ul>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMLTCDCSeparator'></div>
+		</div>
+		<!-- 留言板 -->
+		<div class='bodyMRCDiv'>
+			<div class='bodyMRCDTitle'>
+				<div class='bodyMRCDTitleF'>留言板</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMRCDContent'>
+				<ul>
+					<li>等待开通</li>
+				</ul>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMLTCDCSeparator'></div>
+		</div>
+		<!-- 快捷通道 -->
+		<div class='bodyMRCDiv'>
+			<div class='bodyMRCDTitle'>
+				<div class='bodyMRCDTitleF'>快捷通道</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMRCDContent'>
+				<ul>
+					<li><a target='_blank' href='http://pan.baidu.com/share/home?uk=1695403233&view=share#category/type=0'>百度共享网盘</a></li>
+				</ul>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMLTCDCSeparator'></div>
+		</div>
+		<!-- 服务器详细 -->
+		<div class='bodyMRCDiv'>
+			<div class='bodyMRCDTitle'>
+				<div class='bodyMRCDTitleF'>服务器详细</div>
+				<div style="clear:both;"></div>
+			</div>
+			<div class='bodyMRCDContent'>
+				<ul>
+					<li>系统版本：<?=php_uname('s')?></li>
+					<li>运行方式：<?=php_sapi_name()?></li>
+					<li>PHP版本：<?=PHP_VERSION?></li>
+					<li>文章总数：<?=$this->_articleCount?> 篇</li>
+					<li>网站工作：<?=$this->_workDate?> 天</li>
+				</ul>
+				<div style="clear:both;"></div>
+			</div>
+			<!-- <div class='bodyMLTCDCSeparator'></div> -->
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+</div>
+<? endif; ?>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<?include_once $this->publicPath . 'seo.html'?>
+		<link rel="stylesheet" type="text/css" href="<?=WEB_APPLICATION_PUBLIC?>css/public.css">
+		<link rel="stylesheet" type="text/css" href="<?=WEB_APPLICATION_PUBLIC?>css/index.css">
+		<script type="text/javascript" src='<?=WEB_APPLICATION_PUBLIC?>js/compatibility.js'></script>
+		<script type="text/javascript" src='<?=WEB_APPLICATION_PUBLIC?>js/jquery-2.0.2.min.js'></script>
+		<script type="text/javascript" src='<?=WEB_APPLICATION_PUBLIC?>js/index.js'></script>
+		<script type="text/javascript" src='<?=WEB_APPLICATION_PUBLIC?>js/com.trojanbox.public.js'></script>
+	</head>
+	<body>
+		<!-- 首页头部 开始 -->
+		<?include_once $this->publicPath . 'header.html'?>
+		<!-- 首页头部 结束 -->
+		<!-- 内容区 开始 -->
+		<div class='bodyMain'>
+			<div class='bodyMainLeft'>
+				<div class='bodyMLTitle'>
+					<div class='bodyMLTitleF'>日志</div>
+				</div>
+				<div class='bodyMLTContent'>
+					<!-- 内容模板开始 -->
+					<?if(!empty($this->articleLists)):?>
+	                    <?php $i = 1; foreach($this->articleLists as $value): ?>
+						<div class='bodyMLTCDiv'>
+							<div class='bodyMLTCDC'>
+								<div class='bodyMLTCDCImg'>
+									<img src='<?=WEB_APPLICATION_PUBLIC?>images/articleListsDefault.jpg'>
+								</div>
+								<div class='bodyMLTCDCCentent'>
+									<div class='bodyMLTCDCCTD'>
+										<div class='bodyMLTCDCCTitle'>
+											<font style='color:#00abdc;'><a href='/lists/<?=$value['gid']?>.html'><?=$value['name']?></a>&nbsp;</font><a href='/show/<?=$value['id'] ?>.html'><?=$value['title'] ?></a>
+										</div>
+										<div class='bodyMLTCDCCManage'>
+											<a href='/show/<?=$value['id'] ?>.html#comment'>发表评论</a>
+										</div>
+									</div>
+									<div class='bodyMLTCDCCContent'>
+	                                    <?php if (!empty($value['description'])): ?>
+	                                    	&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value['description'] ?>
+	                                    <?php else: ?>
+	                                    	获取信息时出现错误！请联系管理员解决问题！
+	                                    <?php endif; ?>
+									</div>
+									<div class='bodyMLTCDCCDate'>
+										<div class='bodyMLTCDCCDDiv'>
+											发表日期：&nbsp;<a href='javascript:void(0)'><?php echo date('Y-m-d',strtotime($value['add_time'])) ?></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class='bodyMLTCDCSeparator'></div>
+						</div>
+	                    <?php endforeach; ?>
+					<!-- 内容模板结束 -->
+	                    <?php if (!empty($this->firstPage) && $this->firstPage != $this->lastPage): ?>
+	                    <div class="bodyPage">
+	                        <div class="bodyPageDiv">
+	                            <div class="bodyPageDA"><a href='<?if ($this->currentPage == $value):?>javascript: void(0);<?else:?>/lists/0-<?=$this->firstPage?>.html<?endif;?>'>首页</a></div>
+	                            <div class="bodyPageDA"><a href='<?if ($this->currentPage == $value):?>javascript: void(0);<?else:?>/lists/0-<?=$this->upPage?>.html<?endif;?>'>上一页</a></div>
+	                            <?foreach ($this->listsPage as $key => $value):?>
+	                            	<div class="bodyPageDB <?if ($this->currentPage == $value):?>bodyPageCurr<?endif;?>"><a href='<?if ($this->currentPage == $value):?>javascript: void(0);<?else:?>/lists/0-<?=$value?>.html<?endif;?>'><?=$value?></a></div>
+	                            <?endforeach;?>
+	                            <div class="bodyPageDA"><a href='<?if ($this->currentPage == $value):?>javascript: void(0);<?else:?>/lists/0-<?=$this->downPage?>.html<?endif;?>'>下一页</a></div>
+	                            <div class="bodyPageDC"><a href='<?if ($this->currentPage == $value):?>javascript: void(0);<?else:?>/lists/0-<?=$this->lastPage?>.html<?endif;?>'>尾页</a></div>
+	                        </div>
+	                    </div>
+	                    <?php endif; ?>
+	                <?else:?>
+	                	<?include_once $this->publicPath . 'error.html'?>
+	                <?endif;?>
+					<div style="clear:both;"></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			<?include_once $this->publicPath . 'manage.html'?>
+			<div style="clear:both;"></div>
+		</div>
+		<!-- 内容区 结束 -->
+		<?include_once $this->publicPath . 'footer.html'?>
+	</body>
+</html>

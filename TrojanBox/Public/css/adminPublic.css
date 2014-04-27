@@ -1,0 +1,69 @@
+* {
+	outline: none;
+	margin: 0px;
+	padding: 0px;
+	font-family: 微软雅黑;
+}
+
+.publicFramework {
+	margin-left: 20px;
+	margin-top: 15px;
+}
+
+.publicFramework input[type^=submit] {
+	border: 2px solid #2D2D2D;
+	padding: 3px 8px;
+	background: #2D2D2D;
+	margin-top: 20px;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.publicFramework input[type^=submit]:hover {
+	color: #2D2D2D;
+	background: #FFFFFF;
+	cursor: pointer;
+}
+
+.publicFramework input[type^=submit]:active {
+	border: 2px solid #00abdc;
+	color: #FFFFFF;
+	background: #00abdc;
+	cursor: pointer;
+}
+
+.publicTable {
+	border: 1px solid #2D2D2D;
+	border-collapse: collapse;
+	color: white;
+	font-size: 12px;
+}
+
+.publicTable tr td {
+	border: 2px solid #2D2D2D;
+}
+
+.publicTable tr td:first-child {
+	background: #2D2D2D;
+	text-align: center;
+	font-weight: bold;
+	padding: 5px 5px;
+}
+
+.publicTable tr td input[type^=text] {
+	border: 0px;
+	width: 100%;
+	height: 27px;
+}
+
+.publicSelect {
+	border: 0px;
+	width: 100%;
+	height: 27px;
+}
+
+#message {
+	font-weight: bolder;
+	font-size: 12px;
+}

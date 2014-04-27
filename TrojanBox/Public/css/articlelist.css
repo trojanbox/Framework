@@ -1,0 +1,29 @@
+* {
+	font-family: 微软雅黑;
+	margin: 0px;
+	padding: 0px;
+}
+
+#listView {
+	margin: 20px 0 0 20px;
+	border: 1px solid #3D3D3D;
+}
+
+#listView a {
+	color: #2D2D2D;
+	text-decoration: none;
+}
+
+#listView tr td {
+	border: 1px solid #2D2D2D;
+	padding: 5px 10px;
+	font-size: 12px;
+	color: #00000;
+}
+
+#listView tr:first-child td {
+	background: #2D2D2D;
+	color: #F7F7F7;
+	text-align: center;
+	font-weight: bold;
+}

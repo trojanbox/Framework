@@ -1,0 +1,1 @@
+{"time":0,"state":false,"name":"SELECT count(id) FROM `article` ","lifecycle":1396231186,"content":[{"count(id)":"8","0":"8"}]}

@@ -1,0 +1,47 @@
+<? if (!empty($this->articlenavi)): ?>
+	<?if (empty($this->lists)):?>
+		<div class='headNaviList'>
+			<div class='headNLContent'>
+				<div>
+				<a href='/'>首页</a>
+				</div>
+				<div>
+					<a href='/lists/<?=$this->articleInfo['gid'] ?>.html'><?=$this->articleInfo['name'] ?></a>
+				</div>
+			</div>
+		</div>
+		<div class='headTitle'>
+			<div class='headTLeft'>
+				<div class='headTLTitle'><?=$this->articleInfo['title'] ?><!-- 标题长度已经达到15字不能再多了 --></div>
+				<div class='headTlTFen'><a style='color:#00abdc;font-weight: bold;padding-top:10px;margin-left:15px;font-size:14px;'><?=$this->articleInfo['name'] ?></a></div>
+			</div>
+			<div class='headTRight'>
+				<div class='headTLSim'>
+					作者：<?=$this->articleInfo['nickname'] ?> 
+					发布时间：<?=date('Y-m-d',strtotime($this->articleInfo['add_time'])) ?>   
+				</div>
+			</div>
+		</div>
+	<?else:?>
+		<div class='headNaviList'>
+			<div class='headNLContent'>
+				<div>
+				<a href='/'>首页</a>
+				</div>
+				<div>
+					<a href='/lists/<?=$this->articleInfo['id'] ?>.html'><?=$this->articleInfo['name'] ?></a>
+				</div>
+			</div>
+		</div>
+		<div class='headTitle'>
+			<div class='headTLeft'>
+				<div class='headTLTitle'><?=$this->articleInfo['name']?><!-- 标题长度已经达到15字不能再多了 --></div>
+			</div>
+			<div class='headTRight'>
+				<div class='headTLSim'>
+					 
+				</div>
+			</div>
+		</div>
+	<?endif;?>
+<? endif; ?>

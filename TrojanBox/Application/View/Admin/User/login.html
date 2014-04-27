@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta content="text/html" charset="utf-8" />
+        <link type="text/css" rel="stylesheet" href="<?=WEB_APPLICATION_PUBLIC?>css/userLogin.css" />
+        <script type="text/javascript" src='<?=WEB_APPLICATION_PUBLIC?>js/compatibility.js'></script>
+        <script type="text/javascript" src="<?=WEB_APPLICATION_PUBLIC?>js/jquery-2.0.2.min.js"></script>
+        <script type="text/javascript" src="<?=WEB_APPLICATION_PUBLIC?>js/userLogin.js"></script>
+    </head>
+    <body>
+        <div style="margin:20px 0 0 20px;font-size:43px;color:#3D3D3D;">后台管理，命令控制台应用程序。</div>
+        <div style="margin:20px 0 0 20px;font-size:18px;color:#3D3D3D;">公告：个人博客系统允许申请子用户。点击向管理员<a href="###">申请</a>子用户。</div>
+        <div style="margin:20px 0 0 20px;font-size:12px;color:#3D3D3D;">状态：<span id="messageBox">这是消息盒子。所有登录状态将显示到这里。</span></div>
+        
+        <div class="userlogin">
+            <input type="password" class="public" id="public" />
+            <input type="button" value="登录" class="submit" id="submit" />
+        </div>
+    </body>
+</html>
