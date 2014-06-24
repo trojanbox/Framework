@@ -1,1 +1,0 @@
-{"time":0,"state":false,"name":"SELECT id, pid, aid, user_name, content, add_time FROM `comment` WHERE `aid` = 10 ORDER BY add_time DESC","lifecycle":1396247604,"content":[]}

@@ -1,1 +1,0 @@
-{"time":0,"state":false,"name":"SELECT count(id)\r\n\t\t\t\tFROM `article`\r\n\t\t\t\tWHERE classify_id = '1'","lifecycle":1396152150,"content":{"count(id)":"4","0":"4"}}
