@@ -29,12 +29,12 @@ $webApplication->setExtend(function ($web) {
 	PackageManager::setAutoLoad(true);
 	
 	/*
-    $c = new CreateExtendPackage('com-trojanbox-util-page-basicpage', WORKSPACE . 'Extend');
-    $c->setAuthor('TrojanBox');
-    $c->setDescription('分页类');
-    $c->setSee('http://www.trojanbox.com');
-    $c->setVersion('1.0');
-    $c->uppack();
+	$c = new CreateExtendPackage('com-trojanbox-util-page-basicpage', WORKSPACE . 'Extend');
+	$c->setAuthor('TrojanBox');
+	$c->setDescription('分页类');
+	$c->setSee('http://www.trojanbox.com');
+	$c->setVersion('1.0');
+	$c->uppack();
 	*/
 	
 });
