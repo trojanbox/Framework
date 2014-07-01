@@ -124,13 +124,10 @@ class Framework {
 	public static function autoload($className) {
 		$className = str_replace('\\', DS, $className);
 		if (is_file(WORKSPACE . $className . '.php')) {
-			echo 'Class:' . $className . '<br />';
 			include_once WORKSPACE . $className . '.php';
 			return ;
 		}
-		
-		
-		
+
 		if (is_file(WORKSPACE . 'Extend' . DS . $className . '.php')) {
 			include_once WORKSPACE . 'Extend' . DS . $className . '.php';
 			return ;
@@ -138,7 +135,6 @@ class Framework {
 
 		if (false !== ($sourceInfo = PackageManager::getInstace()->getSource('\\' . $className))) {
 			$package = 'phar://' . APP_PACKAGE . $sourceInfo['directory'] . DS . $sourceInfo['package_name'] . '\\' . $className . '.php';
-			echo '<font color="red">Package:' . $package . '</font><br />';
 			include $package;
 			return ;
 		}
