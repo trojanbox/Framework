@@ -28,7 +28,7 @@ TrojanBox 框架核心：基于事件驱动与包管理器的核心框架
 <b>即将添加的新功能</b><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;将加入事件控制并将其作为核心。<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;监听管理器 - 管理所有已注册的监听器 - 支持两种监控类型<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行为监听<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;触发监听<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;行为监听 - 达到当前位置时执行<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;触发监听 - 达到当前位置并触发指定条件后执行<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;事件管理器 - 管理所有已注册的事件 - 事件需要绑定到监听器<br/>
 <br/>
