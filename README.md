@@ -1,4 +1,4 @@
-TrojanBox
+Framework Master 2.0
 =========
 
 TrojanBox 框架核心：基于事件驱动与包管理器的核心框架
