@@ -3,39 +3,20 @@ namespace Trojanbox\Event;
 
 use Trojanbox\Event\EventInterface\BehaviorListenerInterface;
 
-class BehaviorListener implements BehaviorListenerInterface {
+/**
+ * 行为监视器
+ */
+class BehaviorListener extends ListenerAbstract implements BehaviorListenerInterface {
 
 	private $_eventLists;
+	private $_listenerName;
 	
 	public function __construct($listenerName) {
-		
-	}
-
-	public function monitor() {
-		
-	}
-
-	public function disableListener() {
-		
-	}
-
-	public function enableListener() {
-		
+		$this->_listenerName = $listenerName;
 	}
 	
-	public function addEventHandle($eventName,\Trojanbox\Event\EventInterface\EventInterface $event) {
-		
-	}
-
-	public function removeEventHandle($eventName) {
-		
-	}
-
-	public function getEventHandles() {
-		
-	}
-
-	public function executeEvent($eventName) {
-		
+	public function monitor() {
+		if ($this->_listenerState == false) return false;
+		$this->executeEvents();
 	}
 }

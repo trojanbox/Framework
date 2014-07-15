@@ -15,7 +15,7 @@ date_default_timezone_set('Asia/Shanghai');
 
 session_start();
 
-include '/Trojanbox/Framework/WebApplication.php';
+include 'Trojanbox/Framework/WebApplication.php';
 
 // 当前目录 - 必备常量
 defined('WORKSPACE') === false ? define('WORKSPACE', dirname(__FILE__) . DIRECTORY_SEPARATOR) : '';
@@ -27,15 +27,6 @@ $webApplication->setExtend(function ($web) {
 	
 	// 自动加载所有包
 	PackageManager::setAutoLoad(true);
-	
-	/*
-	$c = new CreateExtendPackage('com-trojanbox-util-page-basicpage', WORKSPACE . 'Extend');
-	$c->setAuthor('TrojanBox');
-	$c->setDescription('分页类');
-	$c->setSee('http://www.trojanbox.com');
-	$c->setVersion('1.0');
-	$c->uppack();
-	*/
 	
 });
 

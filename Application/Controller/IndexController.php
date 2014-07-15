@@ -5,8 +5,8 @@ use Trojanbox\Framework\Controller;
 
 class IndexController extends Controller {
 	
-	public function indexAction() {		
-		echo 1;
+	public function indexAction() {
+		
 	}
 	
 }

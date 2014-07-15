@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Event\EventInterface;
 
-interface TriggerListenerInterface extends ListenerInterface {
+interface TriggerListenerInterface {
 	
 	/**
 	 * 创建触发监视器
@@ -12,7 +12,7 @@ interface TriggerListenerInterface extends ListenerInterface {
 	
 	/**
 	 * 启用监视
-	 * @param unknown $triggerString
+	 * @param string $triggerString 监视条件
 	 */
 	public function monitor($triggerString);
 	

@@ -2,40 +2,42 @@
 namespace Trojanbox\Event;
 
 use Trojanbox\Event\EventInterface\TriggerListenerInterface;
+use Trojanbox\Event\Exception\ListenerException;
 
-class TriggerListener implements TriggerListenerInterface {
+/**
+ * 触发监视器
+ */
+class TriggerListener extends ListenerAbstract implements TriggerListenerInterface {
 
 	private $_eventLists;
+	private $_triggerString;
 	
+	/**
+	 * 创建触发监视器
+	 * @param string $listenerName 监听器名称
+	 */
 	public function __construct($listenerName, $triggerString) {
-		
+		$this->_listenerName = $listenerName;
+		$this->_triggerString = strtoupper($triggerString);
 	}
 
 	public function monitor($triggerString) {
-		
-	}
-
-	public function disableListener() {
-		
-	}
-
-	public function enableListener() {
-		
-	}
-
-	public function addEventHandle($eventName,\Trojanbox\Event\EventInterface\EventInterface $event) {
-		
-	}
-
-	public function removeEventHandle($eventName) {
-		
-	}
-
-	public function getEventHandles() {
-		
-	}
-
-	public function executeEvent($eventName) {
-		
+		if (is_null($triggerString) 
+				|| !is_string($triggerString)) {
+			throw new ListenerException('触发监听器需要填写触发条件！');
+		}
+		if (0 == strpos($this->_listenerState, 'trigger://string=')) {
+			$string = str_replace('trigger://string=', '', $this->_listenerState);
+			if ($string == $triggerString) {
+				$this->executeEvents();
+			}
+		} elseif (0 == strpos($this->_listenerState, 'trigger://preg=')) {
+			$string = str_replace('trigger://preg=', '', $this->_listenerState);
+			if (preg_match($string, $triggerString)) {
+				$this->executeEvents();
+			}
+		} else {
+			throw new ListenerException('无效的触发条件！');
+		}
 	}
 }

@@ -27,13 +27,25 @@ interface ListenerInterface {
 	public function removeEventHandle($eventName);
 	
 	/**
+	 * 事件是否存在
+	 * @param string $eventName 事件名称
+	 */
+	public function existEvent($eventName);
+	
+	/**
 	 * 获取事件列表
 	 */
 	public function getEventHandles();
 	
 	/**
-	 * 执行指定事件
+	 * 执行事件
 	 * @param string $eventName 事件名称
 	 */
-	public function executeEvent($eventName);
+	public function executeEvents();
+
+	/**
+	 * 取得监视器名称
+	 */
+	public function getName();
+	
 }
