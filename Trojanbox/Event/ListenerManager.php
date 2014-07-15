@@ -3,30 +3,45 @@ namespace Trojanbox\Event;
 
 use Trojanbox\Event\EventInterface\ListenerInterface;
 
-class ListenerManager {
+class ListenerManager implements \Iterator {
 	
-	private static $_listenerLists;
+	private $_listenerLists;
+	private static $_self;
+	private $_vaild = true;
+	
+	private public function __construct() {}
+	
+	/**
+	 * 取得监听管理器的实例
+	 * @return \Trojanbox\Event\ListenerManager
+	 */
+	public static function getInstance() {
+		if (self::$_self instanceof self) {
+			self::$_self = new self();
+		}
+		return self::$_self;
+	}
 	
 	/**
 	 * 注册到监听管理器
 	 * @param ListenerInterface $listener
 	 */
-	public static function registerListener(ListenerInterface $listener) {
-		self::$_listenerLists[$listener->getName()] = $listener;
+	public function registerListener(ListenerInterface $listener) {
+		$this->_listenerLists[$listener->getName()] = $listener;
 	}
 	
 	/**
 	 * 移除指定监视器
 	 * @param string $listenerName 监视器名称
 	 */
-	public static function removeListener($listenerName) {
+	public function removeListener($listenerName) {
 		
 	}
 	
 	/**
 	 * 取得监视器列表
 	 */
-	public static function getListeners() {
+	public function getListeners() {
 		
 	}
 	
@@ -34,7 +49,7 @@ class ListenerManager {
 	 * 取得指定监视器
 	 * @param string $listenerName 监视器名称
 	 */
-	public static function getListener($listenerName) {
+	public function getListener($listenerName) {
 		
 	}
 	
@@ -45,4 +60,25 @@ class ListenerManager {
 	public static function existListener($listenerName) {
 		
 	}
+	
+	public function current() {
+		return current($this->_listenerLists);
+	}
+
+	public function next() {
+		$this->_vaild = (false !== next($this->_listenerLists));
+	}
+
+	public function key() {
+		return key($this->_listenerLists);
+	}
+
+	public function valid() {
+		return $this->_valid;
+	}
+
+	public function rewind() {
+		$this->vaild = (false !== reset($this->_listenerLists));
+	}
+
 }
