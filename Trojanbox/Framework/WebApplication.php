@@ -1,6 +1,11 @@
 <?php
 namespace Trojanbox\Framework;
 
+use Trojanbox\Framework\Exception\PageNotFoundException;
+use Trojanbox\Config\ArrayConfig;
+use Trojanbox\File\File;
+use Trojanbox\Exception\ErrorExceptionHandle;
+
 require_once 'Framework.php';
 
 /**
@@ -23,11 +28,12 @@ class WebApplication extends Framework {
 	}
 	
 	public function __construct() {
-		try {
-			parent::__construct();
-		} catch (\Exception $e) {
-			echo $e;
-		}
+		spl_autoload_register(array($this, 'autoload'));
+		ErrorExceptionHandle::setExceptionHandle();
+		ErrorExceptionHandle::setErrorHandle();
+		ErrorExceptionHandle::setFatalErrorHandle();
+		parent::__construct();
+		
 	}
 	
 	/**
@@ -36,8 +42,10 @@ class WebApplication extends Framework {
 	public function run() {
 		try {
 			$this->letsGo();	// 执行
-		} catch (\Exception $e) {	// 处理所有未被捕捉的异常
-			echo $e;
+		} catch (PageNotFoundException $e) {
+			$config = new ArrayConfig(new File(WORKSPACE . 'System' . DS . 'Config' . DS . 'ExceptionTemplate.php'));
+			$pageNotFound = $config->getConfig('page not found');
+			$pageNotFound();
 		}
 	}
 }

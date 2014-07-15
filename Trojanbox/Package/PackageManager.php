@@ -17,7 +17,7 @@ class PackageManager implements PackageManagerInterface {
 	
 	private function __construct() {
 		$cache = new CacheCore(new BasicCacheFronted(), new FileCacheBackend(array(
-			'time' => 0, 'tag' => 'package_', 'directory' => WORKSPACE . 'System' . DS . 'Runtime' . DS
+			'time' => 0, 'tag' => 'package_', 'directory' => WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Runtime' . DIRECTORY_SEPARATOR
 		)));
 		
 		$this->_cache = $cache->run();
@@ -104,7 +104,7 @@ class PackageManager implements PackageManagerInterface {
 					// 文件内容整理
 					$config = unserialize(include_once $directoryIterator->getPathname());
 					$this->_sourceLists = array_merge($this->_sourceLists, $config['class_lists']);
-					$search = array(APP_PACKAGE, DS . $directoryIterator->getFilename(), $directoryIterator->getFilename());
+					$search = array(APP_PACKAGE, DIRECTORY_SEPARATOR . $directoryIterator->getFilename(), $directoryIterator->getFilename());
 					$config['extend_info']['directory'] = str_replace($search, '', $directoryIterator->getPathname());
 					$this->_packageLists = array_merge($this->_packageLists, array(
 						$directoryIterator->getFilename() => $config['extend_info'])
