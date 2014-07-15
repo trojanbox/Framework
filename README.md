@@ -1,4 +1,4 @@
-TrojanBox Framework BATA2.1 更新日志
+Framework BATAX 2.1.1 更新日志
 =========
 
 <b>介绍</b><br/>
@@ -18,9 +18,9 @@ TrojanBox 框架核心：基于事件驱动与包管理器的核心框架
 &nbsp;&nbsp;&nbsp;&nbsp;注意：TBFramework 仅能识别由 Trojanbox\Package\CreateExtendPackage 类创建的 *.phar 文件。<br/>
 <br/>
 
-
+更加完整的异常处理机制<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;trycatch 语句能捕捉大多数错误与异常，但仍有一些错误无法捕捉，如：语法错误。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ApplicationException 应用程序异常基类，所有异常类均继承自此类。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ApplicationErrorException 应用程序错误异常基类，所有错误异常类均继承自此类。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Framework 内置8个基础的异常处理类。<br/>
 <br/>
-<b>即将加入的新功能</b>
-<ol>
-	<li>变量类型约束</li>
-</ol>
