@@ -15,7 +15,17 @@ TrojanBox 框架核心：基于事件驱动与包管理器的核心框架
 
 包管理器（使用PHP归档）<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;将 *.phar 置入Package下，可以实现自动加载。<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;注意：TBFramework 仅能识别由 Trojanbox\Package\CreateExtendPackage 类创建的 *.phar 文件。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;注意：TBFramework 仅能识别由 \Trojanbox\Package\CreateExtendPackage 类创建的 *.phar 文件。<br/>
+<br/>
+
+Controller, Model, Engine, Event 允许创建多级目录<br/>
+<br/>
+
+路由支持 - 推荐使用路由而不是 .htaccess<br/>
+<br/>
+
+第三方类库支持<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;如果需要使用的类不支持包加载可以选择使用 ExtendClassLoader 加载第三方类库。<br/>
 <br/>
 
 更加完整的异常处理机制<br/>
