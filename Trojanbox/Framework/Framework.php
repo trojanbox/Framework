@@ -1,9 +1,6 @@
 <?php
 namespace Trojanbox\Framework;
 
-use Trojanbox\Framework\Exception\ActionNotFoundException;
-use Trojanbox\Framework\Exception\ControllerNotFoundException;
-use Trojanbox\Framework\Exception\GroupNotFoundException;
 use Trojanbox\Route\Route;
 use Trojanbox\Globals\Globals;
 use Trojanbox\Config\ArrayConfig;

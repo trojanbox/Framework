@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Package\Exception;
 
-use \Trojanbox\Framework\ApplicationException;
+use Trojanbox\Exception\ApplicationException;
 
 class PackageException extends ApplicationException {
     

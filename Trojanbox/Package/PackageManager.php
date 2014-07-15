@@ -2,7 +2,6 @@
 namespace Trojanbox\Package;
 
 use Trojanbox\Package\PackageInterface\PackageManagerInterface;
-use Trojanbox\Framework\Exception\ClassNotFoundException;
 use Trojanbox\Cache\CacheCore;
 use Trojanbox\Cache\Fronted\BasicCacheFronted;
 use Trojanbox\Cache\Backend\FileCacheBackend;

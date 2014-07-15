@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\File\Exception;
 
-use Trojanbox\Framework\ApplicationException;
+use Trojanbox\Exception\ApplicationException;
 
 class InputStreamException extends ApplicationException {
 	

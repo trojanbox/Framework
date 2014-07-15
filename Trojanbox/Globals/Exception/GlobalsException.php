@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Globals\Exception;
 
-use Trojanbox\Framework\ApplicationException;
+use Trojanbox\Exception\ApplicationException;
 
 class GlobalsException extends ApplicationException {
 	

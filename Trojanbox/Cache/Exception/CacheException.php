@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Cache\Exception;
 
-use Trojanbox\Framework\ApplicationException;
+use Trojanbox\Exception\ApplicationException;
 
 class CacheException extends ApplicationException {
 	

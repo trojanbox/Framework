@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Config\Exception;
 
-use Trojanbox\Framework\ApplicationException;
+use Trojanbox\Exception\ApplicationException;
 
 class ArrayConfigException extends ApplicationException {
 	

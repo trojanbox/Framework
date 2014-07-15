@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Route\Exception;
 
-use Trojanbox\Framework\ApplicationException;
+use Trojanbox\Exception\ApplicationException;
 
 class RouteException extends ApplicationException {
 	
