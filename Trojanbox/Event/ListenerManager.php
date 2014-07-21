@@ -35,14 +35,14 @@ class ListenerManager implements \Iterator {
 	 * @param string $listenerName 监视器名称
 	 */
 	public function removeListener($listenerName) {
-		
+		unset($this->_listenerLists[$listenerName]);
 	}
 	
 	/**
 	 * 取得监视器列表
 	 */
 	public function getListeners() {
-		
+		return $this->_listenerLists;
 	}
 	
 	/**
@@ -50,7 +50,7 @@ class ListenerManager implements \Iterator {
 	 * @param string $listenerName 监视器名称
 	 */
 	public function getListener($listenerName) {
-		
+		return $this->_listenerLists[$listenerName];
 	}
 	
 	/**
@@ -58,7 +58,7 @@ class ListenerManager implements \Iterator {
 	 * @param string $listenerName 监视器名称
 	 */
 	public static function existListener($listenerName) {
-		
+		return array_key_exists($listenerName, $this->_listenerLists);
 	}
 	
 	public function current() {

@@ -21,6 +21,9 @@ class TriggerListener extends ListenerAbstract implements TriggerListenerInterfa
 		$this->_triggerString = strtoupper($triggerString);
 	}
 
+	/**
+	 * @see \Trojanbox\Event\EventInterface\TriggerListenerInterface::monitor()
+	 */
 	public function monitor($triggerString) {
 		if (is_null($triggerString) 
 				|| !is_string($triggerString)) {
