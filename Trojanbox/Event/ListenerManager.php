@@ -2,21 +2,22 @@
 namespace Trojanbox\Event;
 
 use Trojanbox\Event\EventInterface\ListenerInterface;
+use Trojanbox\Event\Exception\ListenerManagerException;
 
-class ListenerManager implements \Iterator, \ArrayAccess, \IteratorAggregate {
+class ListenerManager implements \Iterator, \ArrayAccess {
 	
 	private $_listenerLists;
 	private static $_self;
 	private $_vaild = true;
 	
-	private public function __construct() {}
+	private function __construct() {}
 	
 	/**
 	 * 取得监听管理器的实例
 	 * @return \Trojanbox\Event\ListenerManager
 	 */
 	public static function getInstance() {
-		if (self::$_self instanceof self) {
+		if (!self::$_self instanceof self) {
 			self::$_self = new self();
 		}
 		return self::$_self;
@@ -57,8 +58,23 @@ class ListenerManager implements \Iterator, \ArrayAccess, \IteratorAggregate {
 	 * 判断监视器是否存在
 	 * @param string $listenerName 监视器名称
 	 */
-	public static function existListener($listenerName) {
+	public function existListener($listenerName) {
 		return array_key_exists($listenerName, $this->_listenerLists);
+	}
+	
+	public function __get($name) {
+		if (array_key_exists($name, $this->_listenerLists)) {
+			return $this->_listenerLists[$name];
+		} else {
+			throw new ListenerManagerException('Not Found Listener [' . $name . ']', E_WARNING);
+		}
+	}
+	
+	public function __set($key, ListenerInterface $value) {
+		if ($key != $value->getName()) {
+			throw new ListenerManagerException('Key should be equal to the listener name.', E_WARNING);
+		}
+		$this->_listenerLists[$key] = $value;
 	}
 	
 	public function current() {
@@ -92,6 +108,12 @@ class ListenerManager implements \Iterator, \ArrayAccess, \IteratorAggregate {
 	}
 
 	public function offsetSet($offset, $value) {
+		if (!$value instanceof ListenerInterface) {
+			throw new ListenerManagerException('Must implement interface Trojanbox\Event\EventInterface\ListenerInterface, string given', E_RECOVERABLE_ERROR);
+		}
+		if ($offset != $value->getName()) {
+			throw new ListenerManagerException('Key should be equal to the listener name.', E_WARNING);
+		}
 		$this->_listenerLists[$offset] = $value;
 	}
 
@@ -99,9 +121,5 @@ class ListenerManager implements \Iterator, \ArrayAccess, \IteratorAggregate {
 		if (array_key_exists($offset, $this->_listenerLists)) {
 			unset($this->_listenerLists[$offset]);
 		}
-	}
-
-	public function getIterator() {
-		return new \ArrayIterator($this);
 	}
 }

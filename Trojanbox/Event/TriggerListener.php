@@ -9,7 +9,6 @@ use Trojanbox\Event\Exception\ListenerException;
  */
 class TriggerListener extends ListenerAbstract implements TriggerListenerInterface {
 
-	private $_eventLists;
 	private $_triggerString;
 	
 	/**

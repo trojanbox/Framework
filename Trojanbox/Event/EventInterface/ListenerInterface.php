@@ -1,6 +1,8 @@
 <?php
 namespace Trojanbox\Event\EventInterface;
 
+use Trojanbox\Event\EventAbstract;
+
 interface ListenerInterface {
 	
 	/**
@@ -18,7 +20,7 @@ interface ListenerInterface {
 	 * @param string $eventName 事件名称
 	 * @param EventInterface $event 事件对象
 	 */
-	public function addEventHandle($eventName, EventInterface $event);
+	public function addEventHandle(EventAbstract $event);
 	
 	/**
 	 * 移除事件

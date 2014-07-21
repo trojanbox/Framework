@@ -2,11 +2,13 @@
 namespace Trojanbox\Event;
 
 use Trojanbox\Event\EventInterface\ListenerInterface;
+use Trojanbox\Event\Exception\EventException;
 
-abstract class ListenerAbstract implements ListenerInterface {
+abstract class ListenerAbstract implements ListenerInterface, \Iterator, \ArrayAccess {
 	
-	private $_listenerName;
-	private $_listenerState = true;
+	protected $_listenerName;
+	protected $_eventLists;
+	protected $_listenerState = true;
 	
 	public function getName() {
 		return $this->_listenerName;
@@ -41,7 +43,68 @@ abstract class ListenerAbstract implements ListenerInterface {
 		}
 	}
 	
-	public function addEventHandle($eventName, \Trojanbox\Event\EventInterface\EventInterface $event) {
-		$this->_eventLists[$eventName] = $event;
+	public function addEventHandle(EventAbstract $event) {
+		$this->_eventLists[$event->getName()] = $event;
+	}
+	
+	public function __get($name) {
+		if (array_key_exists($name, $this->_eventLists)) {
+			return $this->_eventLists[$name];
+		} else {
+			throw new EventException('Not Found Event [' . $name . ']', E_WARNING);
+		}
+	}
+	
+	public function __set($key, EventAbstract $value) {
+		if ($key != $value->getName()) {
+			throw new EventException('Key should be equal to the event name.', E_WARNING);
+		}
+		$this->_eventLists[$key] = $value;
+	}
+	
+	public function current() {
+		return current($this->_eventLists);
+	}
+	
+	public function next() {
+		$this->_vaild = (false !== next($this->_eventLists));
+	}
+	
+	public function key() {
+		return key($this->_eventLists);
+	}
+	
+	public function valid() {
+		return $this->_valid;
+	}
+	
+	public function rewind() {
+		$this->vaild = (false !== reset($this->_eventLists));
+	}
+	
+	public function offsetExists($offset) {
+		return array_key_exists($offset, $this->_eventLists);
+	}
+	
+	public function offsetGet($offset) {
+		if (array_key_exists($offset, $this->_eventLists)) {
+			return $this->_eventLists[$offset];
+		}
+	}
+	
+	public function offsetSet($offset, $value) {
+		if (!$value instanceof EventAbstract) {
+			throw new EventException('Must extends abstract Trojanbox\Event\EventAbstract, string given', E_RECOVERABLE_ERROR);
+		}
+		if ($offset != $value->getName()) {
+			throw new EventException('Key should be equal to the event name.', E_WARNING);
+		}
+		$this->_eventLists[$offset] = $value;
+	}
+	
+	public function offsetUnset($offset) {
+		if (array_key_exists($offset, $this->_eventLists)) {
+			unset($this->_eventLists[$offset]);
+		}
 	}
 }
