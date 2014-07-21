@@ -3,7 +3,7 @@ namespace Trojanbox\Event;
 
 use Trojanbox\Event\EventInterface\ListenerInterface;
 
-class ListenerManager implements \Iterator {
+class ListenerManager implements \Iterator, \ArrayAccess, \IteratorAggregate {
 	
 	private $_listenerLists;
 	private static $_self;
@@ -81,4 +81,27 @@ class ListenerManager implements \Iterator {
 		$this->vaild = (false !== reset($this->_listenerLists));
 	}
 
+	public function offsetExists($offset) {
+		return array_key_exists($offset, $this->_listenerLists);
+	}
+
+	public function offsetGet($offset) {
+		if (array_key_exists($offset, $this->_listenerLists)) {
+			return $this->_listenerLists[$offset];
+		}
+	}
+
+	public function offsetSet($offset, $value) {
+		$this->_listenerLists[$offset] = $value;
+	}
+
+	public function offsetUnset($offset) {
+		if (array_key_exists($offset, $this->_listenerLists)) {
+			unset($this->_listenerLists[$offset]);
+		}
+	}
+
+	public function getIterator() {
+		return new \ArrayIterator($this);
+	}
 }
