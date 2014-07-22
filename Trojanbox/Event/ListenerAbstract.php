@@ -7,7 +7,7 @@ use Trojanbox\Event\Exception\EventException;
 abstract class ListenerAbstract implements ListenerInterface, \Iterator, \ArrayAccess {
 	
 	protected $_listenerName;
-	protected $_eventLists;
+	protected $_eventLists = array();
 	protected $_listenerState = true;
 	
 	public function getName() {

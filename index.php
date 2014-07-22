@@ -23,11 +23,7 @@ defined('FRAMEWORK') === false ? define('FRAMEWORK', WORKSPACE . 'Trojanbox' . D
 
 $webApplication = new WebApplication();
 
-$webApplication->setExtend(function ($web) {
-	
-	// 自动加载所有包
-	PackageManager::setAutoLoad(true);
-	
-});
+// 自动加载所有包
+PackageManager::setAutoLoad(true);
 
 $webApplication->run();

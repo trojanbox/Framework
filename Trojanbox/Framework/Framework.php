@@ -14,14 +14,7 @@ use Trojanbox\Package\PackageManager;
  */
 class Framework {
 	
-	public $url = null;
-	
-	/** 系统 监听器 */
-	private $SystemFrameworkEvent = null;
-	
-	/** 路由 监听器 */
-	private $RouteNamespaceControllerEvent = null;
-	private $RouteNamespaceControllerActionEvent = null;
+	public $globals = null; 
 	
 	/**
 	 * 框架规则配置文件
@@ -36,6 +29,7 @@ class Framework {
 		$this->activate();
 		// 包管理器
 		PackageManager::getInstace()->loadPackage();
+		$this->globals = Globals::getInstance();
 	}
 	
 	/**
@@ -97,6 +91,10 @@ class Framework {
 	 * @throws \Trojanbox\Exception
 	 */
 	public function letsGo() {
+		
+		if ($this->globals->listener->existListener('onBeginRequest')) {
+			$this->globals->listener->onBeginRequest->monitor();
+		}
 		
 		$routeArray = new ArrayConfig(new File(WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Config.php'));
 		
@@ -166,9 +164,12 @@ class Framework {
 	 */
 	final protected function dispatcher() {
 		
-		// 钩子监听器
-		$httpRequestArgs = Globals::getInstance()->HttpRequestArgs;
+		$httpRequestArgs = $this->globals->HttpRequestArgs;
 
+		if ($this->globals->listener->existListener('BeginDisapther')) {
+			$this->globals->listener->BeginDisapther->monitor();
+		}
+		
 		$directory = APP_APPLICATION_CONTROLLER . $httpRequestArgs['directory'];
 		$controller = 'Application\\Controller\\' . str_replace(DIRECTORY_SEPARATOR, '\\', $httpRequestArgs['directory']) . ucfirst($httpRequestArgs['controller']) . 'Controller';
 		$action = $httpRequestArgs['action'] . 'Action';
@@ -190,7 +191,14 @@ class Framework {
 			throw new \NoSuchMethodException('No Found Action ' . $action . '!');
 		}
 		
+		if ($this->globals->listener->existListener('onEndDispatcher')) {
+			$this->globals->listener->onEndDispatcher->monitor();
+		}
+		
 		$controllerInstance->$action();
+		
+		if ($this->globals->listener->existListener('onEndRequest')) {
+			$this->globals->listener->onEndRequest->monitor();
+		}
 	}
-	
 }

@@ -6,7 +6,7 @@ use Trojanbox\Event\Exception\ListenerManagerException;
 
 class ListenerManager implements \Iterator, \ArrayAccess {
 	
-	private $_listenerLists;
+	private $_listenerLists = array();
 	private static $_self;
 	private $_vaild = true;
 	
@@ -60,6 +60,14 @@ class ListenerManager implements \Iterator, \ArrayAccess {
 	 */
 	public function existListener($listenerName) {
 		return array_key_exists($listenerName, $this->_listenerLists);
+	}
+	
+	/**
+	 * 预处理器 - 自动加载配置文件中的设置
+	 * @param array $array 配置
+	 */
+	public function prepare($array) {
+		
 	}
 	
 	public function __get($name) {
