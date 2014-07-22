@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Framework;
 
-use Trojanbox\Route\Route;
+use Trojanbox\Framework\Route;
 use Trojanbox\Framework\Globals;
 use Trojanbox\Config\ArrayConfig;
 use Trojanbox\File\File;

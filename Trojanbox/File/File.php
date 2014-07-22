@@ -15,7 +15,7 @@ class File implements FileInterface {
 	 */
 	public function __construct($fileName) {
 		if (!is_file($fileName)) {
-			throw new FileNotFoundException('文件不存在' . $this->_fileDirectory . '。<br />' . $fileName);
+			throw new FileNotFoundException('Not Found File ' . $this->_fileDirectory . DIRECTORY_SEPARATOR . $fileName);
 		}
 		$this->_fileDirectory = $fileName;
 	}

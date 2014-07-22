@@ -18,8 +18,7 @@ class SocketAccept implements SocketAcceptInterface {
 		$this->_socket = $socket;
 		$this->_socketAccept = $socketAccept;
 	}
-	
-	
+
 	public function write($content, $length = null) {
 		if ($length == null) {
 			$length = strlen($content);

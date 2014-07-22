@@ -1,9 +1,7 @@
 <?php
-namespace Trojanbox\Route;
+namespace Trojanbox\Framework;
 
-use Trojanbox\Route\RouteInterface\RouteInterface;
-
-class Route implements RouteInterface {
+class Route {
 	
 	private static $only = null;
 	private $url = null;
