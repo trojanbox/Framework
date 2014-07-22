@@ -14,15 +14,15 @@ require_once 'Framework.php';
  * &nbsp;&nbsp;self 会处理所有未被捕捉的程序异常与程序错误，所有的异常处理与错误处理都继承自 Exception 异常处理器。
  */
 class WebApplication extends Framework {
-
+	
 	private $WORKSPACE = null;
 	
 	/**
 	 * 设置应用程序扩展
 	 * @param string $function
 	 */
-	public function setExtend($function = null) {
-		$function($this);
+	public function setExtend($func = null) {
+		$func($this);
 	}
 	
 	public function __construct() {
@@ -31,7 +31,6 @@ class WebApplication extends Framework {
 		ErrorExceptionHandle::setErrorHandle();
 		ErrorExceptionHandle::setFatalErrorHandle();
 		parent::__construct();
-		
 	}
 	
 	/**

@@ -2,10 +2,6 @@
 
 use Trojanbox\Framework\WebApplication;
 use Trojanbox\Package\PackageManager;
-use Trojanbox\Event\ListenerManager;
-use Trojanbox\Event\BehaviorListener;
-use Application\Event\DefaultEvent;
-use Trojanbox\Event\EventManager;
 
 /**
  * TrojanBox Framework - 写的更多，做的更少
@@ -34,4 +30,4 @@ $webApplication->setExtend(function ($web) {
 	
 });
 
-//$webApplication->run();
+$webApplication->run();

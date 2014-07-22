@@ -1,7 +1,6 @@
 <?php
 namespace Trojanbox\Framework;
 
-use Trojanbox\Globals\Globals;
 use Trojanbox\Framework\Exception\ViewException;
 
 class View {
