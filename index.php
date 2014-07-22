@@ -18,7 +18,7 @@ session_start();
 include 'Trojanbox/Framework/WebApplication.php';
 
 // 当前目录 - 必备常量
-defined('WORKSPACE') === false ? define('WORKSPACE', dirname(__FILE__) . DIRECTORY_SEPARATOR) : '';
+defined('WORKSPACE') === false ? define('WORKSPACE', dirname(__FILE__) . DIRECTORY_SEPARATOR) : null;
 
 $webApplication = new WebApplication();
 

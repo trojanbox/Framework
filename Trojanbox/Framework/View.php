@@ -6,9 +6,10 @@ use Trojanbox\Framework\Exception\ViewException;
 class View {
 	
 	protected $globals;
+	protected $controller;
 	
-	public function __construct() {
-		
+	public function __construct(Controller $controller) {
+		$this->controller = $controller;
 	}
 	
 	public function display() {
