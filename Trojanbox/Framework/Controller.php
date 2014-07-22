@@ -7,11 +7,8 @@ class Controller {
 	
 	final public function __construct() {
 		$this->_execView();
-		$this->init();
 	}
-	
-	protected function init() {}
-	
+
 	private function _execView() {
 		$this->view = new View();
 		return $this;

@@ -19,7 +19,6 @@ include 'Trojanbox/Framework/WebApplication.php';
 
 // 当前目录 - 必备常量
 defined('WORKSPACE') === false ? define('WORKSPACE', dirname(__FILE__) . DIRECTORY_SEPARATOR) : '';
-defined('FRAMEWORK') === false ? define('FRAMEWORK', WORKSPACE . 'Trojanbox' . DIRECTORY_SEPARATOR) : '';
 
 $webApplication = new WebApplication();
 
