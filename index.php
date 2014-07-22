@@ -5,6 +5,7 @@ use Trojanbox\Package\PackageManager;
 use Trojanbox\Event\ListenerManager;
 use Trojanbox\Event\BehaviorListener;
 use Application\Event\DefaultEvent;
+use Trojanbox\Event\EventManager;
 
 /**
  * TrojanBox Framework - 写的更多，做的更少
@@ -32,22 +33,5 @@ $webApplication->setExtend(function ($web) {
 	PackageManager::setAutoLoad(true);
 	
 });
-
-// 取得监听管理器
-$listener = ListenerManager::getInstance();
-
-// 注册一个监听器
-$listener->registerListener(new BehaviorListener('default'));
-
-// 在指定监听器中添加事件
-$listener->default->addEventHandle(new DefaultEvent('defaultEvent'));
-$listener->default->addEventHandle(new DefaultEvent('defaultEvent2'));
-
-// 执行全部事件
-$listener->default->monitor();
-
-// 执行指定事件
-$listener->default->defaultEvent->handle();
-
 
 //$webApplication->run();

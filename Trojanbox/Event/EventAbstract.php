@@ -7,6 +7,7 @@ abstract class EventAbstract {
 	
 	public function __construct($eventName) {
 		$this->_eventName = $eventName;
+		EventManager::getInstance()->registerEventHandle($this);
 	}
 	
 	/**
