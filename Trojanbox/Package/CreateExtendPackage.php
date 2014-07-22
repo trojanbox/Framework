@@ -103,7 +103,7 @@ class CreateExtendPackage {
 	 * 资源打包处理
 	 */
 	public function uppack() {
-		$this->phar->buildFromDirectory($this->currectDirectory);
+		$this->phar->buildFromDirectory($this->currectDirectory);		
 		$this->phar->setStub("<?php Phar::mapPhar(); return '" . serialize($this->PHAR_INFO) . "'; __HALT_COMPILER();");
 	}
 
