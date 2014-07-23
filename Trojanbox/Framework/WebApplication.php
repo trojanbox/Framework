@@ -4,9 +4,6 @@ namespace Trojanbox\Framework;
 use Trojanbox\Config\ArrayConfig;
 use Trojanbox\File\File;
 use Trojanbox\Exception\ErrorExceptionHandle;
-use Trojanbox\Event\ListenerManager;
-use Trojanbox\Event\EventManager;
-use Trojanbox\Event\BehaviorListener;
 
 require_once 'Framework.php';
 
@@ -19,26 +16,11 @@ require_once 'Framework.php';
 class WebApplication extends Framework {
 	
 	public function __construct() {
-		
-		defined('FRAMEWORK') === false ? define('FRAMEWORK', WORKSPACE . 'Trojanbox' . DIRECTORY_SEPARATOR) : '';
-		
 		spl_autoload_register(array($this, 'autoload'));
 		ErrorExceptionHandle::setExceptionHandle();
 		ErrorExceptionHandle::setErrorHandle();
 		ErrorExceptionHandle::setFatalErrorHandle();
-		
 		parent::__construct();
-		
-		// 监听管理器和事件管理器
-		$this->globals->listener = ListenerManager::getInstance();
-		$this->globals->event = EventManager::getInstance();
-		
-		// 注册默认监听器
-		$this->globals->listener->registerListener(new BehaviorListener('onBeginRequest'));
-		$this->globals->listener->registerListener(new BehaviorListener('onEndRequest'));
-		$this->globals->listener->registerListener(new BehaviorListener('onBeginDispatcher'));
-		$this->globals->listener->registerListener(new BehaviorListener('onEndDispatcher'));
-		
 	}
 	
 	/**
@@ -46,7 +28,7 @@ class WebApplication extends Framework {
 	 */
 	public function run() {
 		try {
-			$this->letsGo();	// 执行
+			$this->activate()->letsGo();
 		} catch (\PageNotFoundException $e) {
 			$config = new ArrayConfig(new File(WORKSPACE . 'System' . DS . 'Config' . DS . 'ExceptionTemplate.php'));
 			$pageNotFound = $config->getConfig('page not found');

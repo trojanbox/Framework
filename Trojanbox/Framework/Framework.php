@@ -6,6 +6,9 @@ use Trojanbox\Framework\Globals;
 use Trojanbox\Config\ArrayConfig;
 use Trojanbox\File\File;
 use Trojanbox\Package\PackageManager;
+use Trojanbox\Event\EventManager;
+use Trojanbox\Event\ListenerManager;
+use Trojanbox\Event\BehaviorListener;
 
 /**
  * 全局控制文件
@@ -14,7 +17,7 @@ use Trojanbox\Package\PackageManager;
  */
 class Framework {
 	
-	public $globals = null; 
+	public $globals = null;
 	
 	/**
 	 * 框架规则配置文件
@@ -26,10 +29,17 @@ class Framework {
 	);
 	
 	public function __construct() {
-		$this->activate();
-		// 包管理器
-		PackageManager::getInstace()->loadPackage();
 		$this->globals = Globals::getInstance();
+		
+		// 监听管理器和事件管理器
+		$this->globals->listener = ListenerManager::getInstance();
+		$this->globals->event = EventManager::getInstance();
+		
+		// 注册默认监听器
+		$this->globals->listener->registerListener(new BehaviorListener('onBeginRequest'));
+		$this->globals->listener->registerListener(new BehaviorListener('onEndRequest'));
+		$this->globals->listener->registerListener(new BehaviorListener('onBeginDispatcher'));
+		$this->globals->listener->registerListener(new BehaviorListener('onEndDispatcher'));
 	}
 	
 	/**
@@ -46,7 +56,6 @@ class Framework {
 			throw new \FrameworkException('框架目录(FRAMEWORK)常量不存在，无法继续！');
 		}
 		
-		//创建新常量
 		defined('DS') === false ? define('DS', DIRECTORY_SEPARATOR) : '';
 		defined('APP_APPLICATION') === false ? define('APP_APPLICATION', WORKSPACE . 'Application' . DS) : '';
 		defined('APP_PACKAGE') === false ? define('APP_PACKAGE', WORKSPACE . 'Package' . DS) : '';
@@ -59,7 +68,12 @@ class Framework {
 		defined('WEB_APPLICATION') === false ? define('WEB_APPLICATION', 'http://' . $_SERVER['HTTP_HOST'] . '/') : '';
 		defined('CACHE_FRAMEWORK') === false ? define('CACHE_FRAMEWORK', WORKSPACE . 'System' . DS . 'FrameworkCache' . DS) : '';
 
+		if ($this->globals->listener->existListener('onBeginRequest')) {
+			$this->globals->listener->onBeginRequest->monitor();
+		}
+		
 		ExtendClassLoader::setExtendDir(APP_APPLICATION_EXTEND);
+		PackageManager::getInstace()->loadPackage();
 		
 		return $this;
 	}
@@ -71,18 +85,11 @@ class Framework {
 		$className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
 		if (is_file(WORKSPACE . $className . '.php')) {
 			include_once WORKSPACE . $className . '.php';
-			return ;
-		}
-
-		if (is_file(WORKSPACE . 'Extend' . DIRECTORY_SEPARATOR . $className . '.php')) {
+		} elseif (is_file(WORKSPACE . 'Extend' . DIRECTORY_SEPARATOR . $className . '.php')) {
 			include_once WORKSPACE . 'Extend' . DIRECTORY_SEPARATOR . $className . '.php';
-			return ;
-		} 
-
-		if (false !== ($sourceInfo = PackageManager::getInstace()->getSource('\\' . $className))) {
+		} elseif (false !== ($sourceInfo = PackageManager::getInstace()->getSource('\\' . $className))) {
 			$package = 'phar://' . APP_PACKAGE . $sourceInfo['directory'] . DIRECTORY_SEPARATOR . $sourceInfo['package_name'] . '\\' . $className . '.php';
 			include $package;
-			return ;
 		}
 	}
 	
@@ -91,10 +98,6 @@ class Framework {
 	 * @throws \Trojanbox\Exception
 	 */
 	public function letsGo() {
-		
-		if ($this->globals->listener->existListener('onBeginRequest')) {
-			$this->globals->listener->onBeginRequest->monitor();
-		}
 		
 		$routeArray = new ArrayConfig(new File(WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Config.php'));
 		
@@ -166,8 +169,8 @@ class Framework {
 		
 		$httpRequestArgs = $this->globals->HttpRequestArgs;
 
-		if ($this->globals->listener->existListener('BeginDisapther')) {
-			$this->globals->listener->BeginDisapther->monitor();
+		if ($this->globals->listener->existListener('onBeginDispatcher')) {
+			$this->globals->listener->onBeginDispatcher->monitor();
 		}
 		
 		$directory = APP_APPLICATION_CONTROLLER . $httpRequestArgs['directory'];

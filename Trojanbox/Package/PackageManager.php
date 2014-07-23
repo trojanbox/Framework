@@ -5,6 +5,7 @@ use Trojanbox\Package\PackageInterface\PackageManagerInterface;
 use Trojanbox\Cache\CacheCore;
 use Trojanbox\Cache\Fronted\BasicCacheFronted;
 use Trojanbox\Cache\Backend\FileCacheBackend;
+use Trojanbox\Exception\ApplicationErrorException;
 
 class PackageManager implements PackageManagerInterface {
 	
@@ -16,9 +17,10 @@ class PackageManager implements PackageManagerInterface {
 	
 	private function __construct() {
 		$cache = new CacheCore(new BasicCacheFronted(), new FileCacheBackend(array(
-			'time' => 0, 'tag' => 'package_', 'directory' => WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Runtime' . DIRECTORY_SEPARATOR
+			'time' => 0, 
+			'tag' => 'package_', 
+			'directory' => WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Runtime' . DIRECTORY_SEPARATOR
 		)));
-		
 		$this->_cache = $cache->run();
 	}
 
@@ -49,7 +51,7 @@ class PackageManager implements PackageManagerInterface {
 	 * 加载所有包信息
 	 */
 	public function loadPackage() {
-		if (null === ($result = $this->_cache->load('SourceLists')) || self::$_autoLoad == true) {
+		if ((null === ($result = $this->_cache->load('SourceLists'))) || self::$_autoLoad == true) {
 			$this->getFileInfo(WORKSPACE . 'Package' . DS);
 			$result['package_lists'] = $this->_packageLists;
 			$result['source_lists'] = $this->_sourceLists;
@@ -57,7 +59,6 @@ class PackageManager implements PackageManagerInterface {
 		}
 		$this->_packageLists = $result['package_lists'];
 		$this->_sourceLists = $result['source_lists'];
-			
 	}
 
 	/**
@@ -83,33 +84,32 @@ class PackageManager implements PackageManagerInterface {
 	private function getFileInfo($sourceDirectory) {
 		$directoryIterator = new \DirectoryIterator($sourceDirectory);
 		while ($directoryIterator->valid()) {
-			
-			// 目录过滤
 			if ($directoryIterator->getFilename() == '..' || $directoryIterator->getFilename() == '.') {
 				$directoryIterator->next();
 				continue;
 			}
-			
 			switch ($directoryIterator->getType()) {
 				case 'file':
-					// 文件类型过滤
 					$fileSuffix = explode('.', $directoryIterator->getBasename());
 					$fileSuffix = strtolower($fileSuffix[count($fileSuffix)-1]);
 					if ($fileSuffix != 'phar') {
 						$directoryIterator->next();
 						continue;
 					}
-					
-					// 文件内容整理
-					$config = unserialize(include_once $directoryIterator->getPathname());
-					$this->_sourceLists = array_merge($this->_sourceLists, $config['class_lists']);
-					$search = array(APP_PACKAGE, DIRECTORY_SEPARATOR . $directoryIterator->getFilename(), $directoryIterator->getFilename());
-					$config['extend_info']['directory'] = str_replace($search, '', $directoryIterator->getPathname());
-					$this->_packageLists = array_merge($this->_packageLists, array(
-						$directoryIterator->getFilename() => $config['extend_info'])
-					);
+
+					try {
+						$config = unserialize(include_once $directoryIterator->getPathname());
+						$this->_sourceLists = array_merge($this->_sourceLists, $config['class_lists']);
+						$search = array(APP_PACKAGE, DIRECTORY_SEPARATOR . $directoryIterator->getFilename(), $directoryIterator->getFilename());
+						$config['extend_info']['verify'] = true;
+						$config['extend_info']['directory'] = str_replace($search, '', $directoryIterator->getPathname());
+						$this->_packageLists = array_merge($this->_packageLists, array (
+							$directoryIterator->getFilename() => $config['extend_info'])
+						);
+					} catch (ApplicationErrorException $e) {
+						// 容错
+					}
 					break;
-				
 				case 'dir':
 					$this->getFileInfo($directoryIterator->getRealPath());
 					break;
