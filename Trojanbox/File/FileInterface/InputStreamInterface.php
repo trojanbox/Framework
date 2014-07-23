@@ -1,6 +1,6 @@
 <?php
 namespace Trojanbox\File\FileInterface;
 
-Interface InputStreamInterface extends FileStreamInterface {
-	
+Interface InputStreamInterface extends FileStreamInterface
+{
 }

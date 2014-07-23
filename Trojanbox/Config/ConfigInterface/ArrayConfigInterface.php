@@ -3,8 +3,8 @@ namespace Trojanbox\Config\ConfigInterface;
 
 use Trojanbox\File\FileInterface\FileInterface;
 
-interface ArrayConfigInterface {
+interface ArrayConfigInterface
+{
 
-	public function __construct(FileInterface $file);
-	
+    public function __construct(FileInterface $file);
 }

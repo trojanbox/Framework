@@ -1,6 +1,6 @@
 <?php
 namespace Trojanbox\Socket\Exception;
 
-class SocketClientException extends SocketException {
-	
+class SocketClientException extends SocketException
+{
 }

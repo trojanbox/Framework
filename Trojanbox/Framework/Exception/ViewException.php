@@ -3,6 +3,6 @@ namespace Trojanbox\Framework\Exception;
 
 use Trojanbox\Exception\ApplicationException;
 
-class ViewException extends ApplicationException {
-	
+class ViewException extends ApplicationException
+{
 }

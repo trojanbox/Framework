@@ -1,6 +1,6 @@
 <?php
 namespace Trojanbox\Cache\Exception;
 
-class CacheFrontedException extends CacheException {
-	
+class CacheFrontedException extends CacheException
+{
 }
