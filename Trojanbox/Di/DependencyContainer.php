@@ -10,7 +10,7 @@ class DependencyContainer implements ContainerInterface
     private $container = array();
 
     private $di = null;
-    
+
     public function __construct(Di $di)
     {
         $this->di = $di;
@@ -18,18 +18,26 @@ class DependencyContainer implements ContainerInterface
 
     /**
      * 注册依赖
-     * 
+     *
      * @param array $di            
      */
-    public function setContainer(array $di)
+    public function setContainer($alias, $className, array $params = null)
     {
-        $this->container = $di;
+        if (! is_string($className)) {
+            throw new DiException('Initialization errors, invalid class name.', E_WARNING);
+        }
+        
+        $container[$alias] = array(
+            'class' => str_replace('.', '\\', $className),
+            'params' => null == $params ? array() : $params,
+        );
+        $this->container = array_merge($this->container, $container);
     }
 
     /**
      * 取得详细信息
-     * 
-     * @param string $alias
+     *
+     * @param string $alias            
      * @throws DiException
      * @return array
      */
@@ -44,16 +52,19 @@ class DependencyContainer implements ContainerInterface
 
     /**
      * 取得依赖实例
-     * 
-     * @param string $alias
+     *
+     * @param string $alias            
      * @throws DiException
      * @return Object
      */
     public function getContainerInstance($alias)
     {
-        if (is_string($alias) && $this->hasAlias($alias)) {} else {
+        if (is_string($alias) && $this->hasAlias($alias)) {
+        	
+        } else {
             throw new DiException('Not Found Alias ' . $alias . '.', E_NOTICE);
         }
+        
         if ($this->di->getInstanceContainer()->hasInstance($alias)) {
             $instance = $this->di->getInstanceContainer()->getInstance($alias);
         } else {
@@ -61,21 +72,21 @@ class DependencyContainer implements ContainerInterface
         }
         return $instance;
     }
-    
+
     /**
      * 检查别名是否存在
-     * 
-     * @param string $alias
+     *
+     * @param string $alias            
      * @return boolean
      */
     public function hasAlias($alias)
     {
         return array_key_exists($alias, $this->container);
     }
-    
+
     /**
      * 取得別名数组
-     * 
+     *
      * @return array
      */
     public function getContainers()

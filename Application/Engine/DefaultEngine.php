@@ -4,8 +4,15 @@ namespace Application\Engine;
 class DefaultEngine
 {
 	
-    public function __construct(DefaultEngine $e = null)
+    private $e = null;
+    
+    public function __construct(TwoEngine $e, FourEngine $f, $string)
     {
-    	echo 1;
+        print_r($string);
+    	echo 'this class';
+    }
+    
+    public function getget() {
+        echo $this->e->get();
     }
 }

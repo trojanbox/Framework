@@ -9,6 +9,7 @@
 use Trojanbox\Framework\WebApplication;
 use Application\Event\LoaderEvent;
 use Trojanbox\Di\Di;
+use Trojanbox\Di\DiConfig;
 
 header('Content-type: text/html; charset=UTF-8');
 date_default_timezone_set('Asia/Shanghai');
@@ -26,8 +27,11 @@ $app = new WebApplication();
 // 注册加载事件
 $app->globals->listener->onBeginRequest->addEventHandle(new LoaderEvent('LoaderEvent'));
 
-$di = new Di();
-$di->set('test', '\\Application\\Engine\\DefaultEngine');
-$object = $di->get('test');
+
+$config = include WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'DiConfig.php';
+
+$diConfig = DiConfig::of(new Di(), $config);
+
+$diConfig->di->get('test');
 
 $app->run();
