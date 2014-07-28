@@ -72,7 +72,7 @@ class ListenerManager implements \Iterator, \ArrayAccess
      * 
      * @param string $listenerName
      */
-    public function existListener($listenerName)
+    public function hasListener($listenerName)
     {
         return array_key_exists($listenerName, $this->_listenerLists);
     }

@@ -2,25 +2,21 @@
 return array(
     'test' => array(
         'class' => 'Application.Engine.DefaultEngine',
+        'factory' => 'factory',
         'params' => array(
-            'test2',
-            'test4',
+        	'Application.Engine.TwoEngine',
+            'apapa',
             array(
-            	123,4235
+        	   1
+            )
+        ),
+        'actions' => array(
+        	'setThree' => array(
+                'test2'
             )
         ),
     ),
     'test2' => array(
-    	'class' => 'Application.Engine.TwoEngine',
-        'params' => array(
-        	'test3'
-        )
-    ),
-    'test3' => array(
-    	'class' => 'Application.Engine.ThreeEngine',
-        
-    ),
-    'test4' => array(
-    	'class' => 'Application.Engine.FourEngine'
+        'class' => 'Application.Engine.ThreeEngine',
     )
 );

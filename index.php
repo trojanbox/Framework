@@ -8,7 +8,7 @@
 
 use Trojanbox\Framework\WebApplication;
 use Application\Event\LoaderEvent;
-use Trojanbox\Di\Di;
+use Trojanbox\Di\DiManager;
 use Trojanbox\Di\DiConfig;
 
 header('Content-type: text/html; charset=UTF-8');
@@ -27,11 +27,12 @@ $app = new WebApplication();
 // 注册加载事件
 $app->globals->listener->onBeginRequest->addEventHandle(new LoaderEvent('LoaderEvent'));
 
-
 $config = include WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'DiConfig.php';
 
-$diConfig = DiConfig::of(new Di(), $config);
+$diConfig = DiConfig::of(new DiManager(), $config);
 
 $diConfig->di->get('test');
+
+$diConfig->di->test;
 
 $app->run();

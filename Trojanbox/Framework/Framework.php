@@ -74,7 +74,7 @@ class Framework
         defined('WEB_APPLICATION') === false ? define('WEB_APPLICATION', 'http://' . $_SERVER['HTTP_HOST'] . '/') : '';
         defined('CACHE_FRAMEWORK') === false ? define('CACHE_FRAMEWORK', WORKSPACE . 'System' . DS . 'FrameworkCache' . DS) : '';
         
-        if ($this->globals->listener->existListener('onBeginRequest')) {
+        if ($this->globals->listener->hasListener('onBeginRequest')) {
             $this->globals->listener->onBeginRequest->monitor();
         }
         
@@ -183,7 +183,7 @@ class Framework
     {
         $httpRequestArgs = $this->globals->HttpRequestArgs;
         
-        if ($this->globals->listener->existListener('onBeginDispatcher')) {
+        if ($this->globals->listener->hasListener('onBeginDispatcher')) {
             $this->globals->listener->onBeginDispatcher->monitor();
         }
         
@@ -208,13 +208,13 @@ class Framework
             throw new \NoSuchMethodException('No Found Action ' . $action . '!');
         }
         
-        if ($this->globals->listener->existListener('onEndDispatcher')) {
+        if ($this->globals->listener->hasListener('onEndDispatcher')) {
             $this->globals->listener->onEndDispatcher->monitor();
         }
         
         $controllerInstance->$action();
         
-        if ($this->globals->listener->existListener('onEndRequest')) {
+        if ($this->globals->listener->hasListener('onEndRequest')) {
             $this->globals->listener->onEndRequest->monitor();
         }
     }

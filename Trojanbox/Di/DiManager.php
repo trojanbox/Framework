@@ -3,7 +3,7 @@ namespace Trojanbox\Di;
 
 use Trojanbox\Di\Exception\DiException;
 
-class Di
+class DiManager
 {
 
     private static $self = null;
@@ -18,6 +18,11 @@ class Di
         $this->instanceContainer = new InstanceContainer($this);
     }
 
+    public function __get($params)
+    {
+    	return $this->get($params);
+    }
+    
     /**
      * 取得依赖容器
      *
@@ -41,14 +46,12 @@ class Di
     /**
      * 设置对象
      *
-     * @param string $alias 别名
-     * @param string $className 类名
-     * @param string $params 参数
+     * @param array $config 详细参数
      * @throws DiException
      */
-    public function set($alias, $className, array $params = null)
+    public function set($alias, $config)
     {
-        $this->dependencyContainer->setContainer($alias, $className, $params);
+        $this->dependencyContainer->setContainer($alias, $config);
     }
 
     /**

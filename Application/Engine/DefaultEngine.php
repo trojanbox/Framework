@@ -6,13 +6,28 @@ class DefaultEngine
 	
     private $e = null;
     
-    public function __construct(TwoEngine $e, FourEngine $f, $string)
+    private $three = null;
+    
+    public function __construct(TwoEngine $e, $string, $array)
     {
-        print_r($string);
+        $this->e = $e;
     	echo 'this class';
+    	echo $string;
+    	print_r($array);
     }
     
-    public function getget() {
+    public function get() {
         echo $this->e->get();
+        echo $this->three->get();
     }
+    
+    public static function factory(TwoEngine $e, $string, $array) {
+        return new self($e, $string, $array);
+    }
+    
+    public function setThree(ThreeEngine $three)
+    {
+    	$this->three = $three;
+    }
+    
 }

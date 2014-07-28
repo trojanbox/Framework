@@ -6,7 +6,12 @@ class ThreeEngine
     
     public function __construct() 
     {
-    	echo 1;
+    	echo 'Three Class';
+    }
+    
+    public function get()
+    {
+    	return 'three class method';
     }
     
 }

@@ -36,7 +36,7 @@ interface ListenerInterface
      * 
      * @param string $eventName
      */
-    public function existEvent($eventName);
+    public function hasEvent($eventName);
 
     /**
      * 获取事件列表

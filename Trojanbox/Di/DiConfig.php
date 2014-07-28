@@ -10,7 +10,7 @@ class DiConfig
     
     private $config = array();
     
-    protected function __construct(Di $di, array $config)
+    protected function __construct(DiManager $di, array $config)
     {
     	$this->di = $di;
     	$this->config = $config;
@@ -24,7 +24,7 @@ class DiConfig
      * @param array $config
      * @return \Trojanbox\Di\DiConfig
      */
-    public static function of(Di $di, array $config)
+    public static function of(DiManager $di, array $config)
     {
     	$newInstance = new static($di, $config);
     	return $newInstance;
@@ -42,9 +42,7 @@ class DiConfig
     protected function iterator()
     {
         foreach ($this->config as $key => $value) {
-            $class = $value['class'];
-            $params = isset($value['params']) ? $value['params'] : array();
-            $this->di->set($key, $class, $params);
+            $this->di->set($key, $value);
         }
     }
 }

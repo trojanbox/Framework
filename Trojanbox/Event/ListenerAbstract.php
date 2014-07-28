@@ -35,7 +35,7 @@ abstract class ListenerAbstract implements ListenerInterface, \Iterator, \ArrayA
         unset($this->_eventLists[$eventName]);
     }
 
-    public function existEvent($eventName)
+    public function hasEvent($eventName)
     {
         return array_key_exists($eventName, $this->_eventLists);
     }

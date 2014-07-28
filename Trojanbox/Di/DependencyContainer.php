@@ -11,7 +11,7 @@ class DependencyContainer implements ContainerInterface
 
     private $di = null;
 
-    public function __construct(Di $di)
+    public function __construct(DiManager $di)
     {
         $this->di = $di;
     }
@@ -21,17 +21,16 @@ class DependencyContainer implements ContainerInterface
      *
      * @param array $di            
      */
-    public function setContainer($alias, $className, array $params = null)
+    public function setContainer($alias, $container)
     {
-        if (! is_string($className)) {
+
+        if (empty($container['class']) || ! is_string($container['class'])) {
             throw new DiException('Initialization errors, invalid class name.', E_WARNING);
         }
         
-        $container[$alias] = array(
-            'class' => str_replace('.', '\\', $className),
-            'params' => null == $params ? array() : $params,
-        );
-        $this->container = array_merge($this->container, $container);
+        $container['params'] = !empty($container['params']) ? $container['params'] : array();
+        
+        $this->container = array_merge($this->container, array($alias => $container));
     }
 
     /**
@@ -59,9 +58,7 @@ class DependencyContainer implements ContainerInterface
      */
     public function getContainerInstance($alias)
     {
-        if (is_string($alias) && $this->hasAlias($alias)) {
-        	
-        } else {
+        if (! is_string($alias) || ! $this->hasAlias($alias)) {
             throw new DiException('Not Found Alias ' . $alias . '.', E_NOTICE);
         }
         
