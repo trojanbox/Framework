@@ -33,6 +33,10 @@ class Framework
 
     public function __construct()
     {
+        if (is_file(FRAMEWORK . 'Vendor' . DIRECTORY_SEPARATOR . 'autoload.php')) {
+            include FRAMEWORK . 'Vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+        }
+        
         $this->globals = Globals::getInstance();
         
         // 监听管理器和事件管理器
@@ -56,10 +60,10 @@ class Framework
         
         // 常量检查
         if (! is_dir(WORKSPACE)) {
-            throw new \FrameworkException('工作空间(WORKSPACE)常量不存在，无法继续！');
+            throw new \FrameworkException('Can not find constant WORKSPACE.');
         }
         if (! is_dir(FRAMEWORK)) {
-            throw new \FrameworkException('框架目录(FRAMEWORK)常量不存在，无法继续！');
+            throw new \FrameworkException('Can not find constant FRAMEWORK.');
         }
         
         defined('DS') === false ? define('DS', DIRECTORY_SEPARATOR) : '';
