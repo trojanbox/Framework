@@ -16,23 +16,20 @@ date_default_timezone_set('Asia/Shanghai');
 
 session_start();
 
-include 'Trojanbox/Framework/WebApplication.php';
-
 // 当前目录 - 必备常量
 define('WORKSPACE', dirname(__FILE__) . DIRECTORY_SEPARATOR);
-define('FRAMEWORK', WORKSPACE . 'Trojanbox' . DIRECTORY_SEPARATOR);
+define('FRAMEWORK', WORKSPACE . 'Framework' . DIRECTORY_SEPARATOR);
+
+include 'Framework' . DIRECTORY_SEPARATOR . 'Trojanbox' . DIRECTORY_SEPARATOR . 'Framework' . DIRECTORY_SEPARATOR . 'WebApplication.php';
+include 'Framework' . DIRECTORY_SEPARATOR . 'Vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $app = new WebApplication();
 
 // 注册加载事件
 $app->globals->listener->onBeginRequest->addEventHandle(new LoaderEvent('LoaderEvent'));
-
 $config = include WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'DiConfig.php';
 
 $diConfig = DiConfig::of(new DiManager(), $config);
-
-$diConfig->di->get('test');
-
-$diConfig->di->test;
+$diConfig->di->capsule;
 
 $app->run();

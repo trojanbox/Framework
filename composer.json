@@ -1,0 +1,9 @@
+{
+  "require" : {
+    "kriswallsmith/assetic" : "1.0.*",
+    "illuminate/database" : ">=4.2.x-dev"
+  },
+  "config" : {
+    "vendor-dir" : "Vendor"
+  }
+}

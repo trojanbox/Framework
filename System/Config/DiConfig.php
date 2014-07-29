@@ -1,22 +1,28 @@
 <?php
 return array(
-    'test' => array(
-        'class' => 'Application.Engine.DefaultEngine',
-        'factory' => 'factory',
+    // 数据库对象
+    'capsule' => array(
+    	'class' => 'Illuminate.Database.Capsule.Manager',
         'params' => array(
-        	'Application.Engine.TwoEngine',
-            'apapa',
-            array(
-        	   1
-            )
+        	
         ),
         'actions' => array(
-        	'setThree' => array(
-                'test2'
+        	'addConnection' => array(
+        	    array(
+        	        'driver'    => 'mysql',
+        	        'host'      => 'localhost',
+        	        'database'  => '158news',
+        	        'username'  => 'root',
+        	        'password'  => '123456',
+        	        'charset'   => 'utf8',
+        	        'collation' => 'utf8_unicode_ci',
+        	        'prefix'    => '',
+        	    )
+        	),
+            'setEventDispatcher' => array(
+            	'Illuminate.Events.Dispatcher',
+                'Illuminate.Container.Container'
             )
-        ),
+        )
     ),
-    'test2' => array(
-        'class' => 'Application.Engine.ThreeEngine',
-    )
 );
