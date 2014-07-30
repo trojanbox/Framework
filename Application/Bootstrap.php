@@ -6,6 +6,8 @@ use Trojanbox\Di\DiConfig;
 use Trojanbox\Di\DiManager;
 use Application\Event\LoaderEvent;
 use Trojanbox\WebApplication;
+use Trojanbox\Di\ServiceLocator;
+use Illuminate\Support\Facades\Cache;
 
 class Bootstrap implements FrameworkInterface
 {
@@ -20,5 +22,10 @@ class Bootstrap implements FrameworkInterface
         $config = include WORKSPACE . 'System' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'DiConfig.php';
         $diConfig = DiConfig::of(new DiManager(), $config);
         $diConfig->di->capsule;
+        
+        
+        ServiceLocator::register('config', new Cache());
+        ServiceLocator::config();
+        
     }
 }

@@ -1,7 +1,10 @@
 {
   "require" : {
-    "kriswallsmith/assetic" : "1.0.*",
-    "illuminate/database" : ">=4.2.x-dev"
+    "kriswallsmith/assetic" : ">=1.1.x-dev",
+    "rmccue/requests" : ">=v1.6.1",
+    "monolog/monolog" : ">=1.10.0",
+    "nette/mail" : ">=v2.2.1",
+    "doctrine/orm" : ">=v2.4.4"
   },
   "config" : {
     "vendor-dir" : "Vendor"
