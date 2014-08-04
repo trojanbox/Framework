@@ -3,7 +3,7 @@ namespace Framework\Trojanbox\Framework;
 
 use Trojanbox\WebApplication;
 
-interface FrameworkInterface
+interface BootstrapInterface
 {
     /**
      * 引导驱动程序

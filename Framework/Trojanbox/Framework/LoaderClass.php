@@ -9,7 +9,7 @@ use Trojanbox\File\Exception\DirectoryNotFoundException;
  * @author Administrator
  *        
  */
-class ExtendClassLoader
+class LoaderClass
 {
 
     private static $_self;

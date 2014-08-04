@@ -17,4 +17,4 @@ define('WORKSPACE', __DIR__ . DIRECTORY_SEPARATOR);
 include WORKSPACE . 'Framework' . DIRECTORY_SEPARATOR . 'Trojanbox' . DIRECTORY_SEPARATOR . 'WebApplication.php';
 
 $app = new WebApplication();
-$app->bootstrap()->run();
+$app->run();

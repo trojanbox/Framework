@@ -1,7 +1,7 @@
 <?php
 namespace Application\Controller\Home;
 
-use Trojanbox\Framework\Controller;
+use Trojanbox\Mvc\Controller;
 
 class IndexController extends Controller
 {
@@ -9,7 +9,7 @@ class IndexController extends Controller
     public function indexAction()
     {
         echo 1;
-        
+        echo 2;
         $this->display();
     }
 }

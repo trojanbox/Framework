@@ -6,6 +6,7 @@ use Trojanbox\File\File;
 use Trojanbox\Exception\ErrorExceptionHandle;
 use Trojanbox\Framework\Framework;
 use Application\Bootstrap;
+use Trojanbox\Framework\AutoLoader;
 require_once 'Framework' . DIRECTORY_SEPARATOR . 'Framework.php';
 
 class WebApplication extends Framework
@@ -14,10 +15,9 @@ class WebApplication extends Framework
     public function __construct()
     {
         define('FRAMEWORK', WORKSPACE . 'Framework' . DIRECTORY_SEPARATOR);
-        spl_autoload_register(array(
-            $this,
-            'autoload'
-        ));
+        
+        $this->setDefine();
+        $autoloader = new AutoLoader();
         ErrorExceptionHandle::setExceptionHandle();
         ErrorExceptionHandle::setErrorHandle();
         ErrorExceptionHandle::setFatalErrorHandle();
