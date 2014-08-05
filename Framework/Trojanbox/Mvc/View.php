@@ -1,28 +1,52 @@
 <?php
 namespace Trojanbox\Mvc;
 
-use Trojanbox\Framework\Exception\ViewException;
 use Trojanbox\Di\ServiceLocator;
+use Trojanbox\Framework\Exception\ViewException;
+use Trojanbox\Framework\FrameworkSupportAbstract;
 
-class View
+class View extends FrameworkSupportAbstract
 {
+
     protected $viewfile = null;
 
-    public function __construct($viewfile)
+    protected $layout = null;
+
+    public function __construct()
+    {}
+
+    public function setLayout(Layout $layout)
     {
-        $httpRequestArgs = ServiceLocator::httpRequestArgs();
-        $view = $httpRequestArgs['directory'] . ucfirst($httpRequestArgs['controller']) . DS . $httpRequestArgs['action'] . '.html';
-        $viewDirectory = APP_APPLICATION_VIEW . $view;
+        $this->layout = $layout;
+    }
+
+    public function render($viewfile = null)
+    {
+        if ($viewfile == null) {
+            $httpRequestArgs = ServiceLocator::httpRequestArgs();
+            $view = APP_MODULE . $httpRequestArgs['module'] . DS . 'Template' . DS . 'View' . DS . $httpRequestArgs['directory'] . ucfirst($httpRequestArgs['controller']) . DS . $httpRequestArgs['action'] . '.html';
+        } else {
+            $dirconfig = self::falsePathParse($viewfile);
+            $view = APP_MODULE . 'Template' . DS . 'View' . $dirconfig['alias'] . DS . 'View' . $dirconfig['directory'] . '.html';
+        }
         
-        if (! is_file($viewfile)) {
+        if (! is_file($view)) {
             throw new ViewException('Not found view file: ' . $viewfile);
         }
         
-        $this->viewfile = $viewfile;
+        $this->viewfile = $view;
+        ob_start();
+        require $view;
+        $content = ob_get_clean();
+        $this->layout->setViewContent($content);
+        $this->layout->render();
     }
 
-    public function display()
-    {
-        include $this->viewfile;
-    }
+    /**
+     * 渲染 Widget
+     *
+     * @param WidgetAbstract $widget            
+     */
+    public function renderWidget(WidgetAbstract $widget)
+    {}
 }

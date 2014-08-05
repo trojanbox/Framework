@@ -1,7 +1,7 @@
 <?php
 namespace Trojanbox\Mvc;
 
-class Model
+abstract class ModelAbstract
 {
 
     final public function __construct()

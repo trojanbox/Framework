@@ -7,6 +7,7 @@ use Trojanbox\Exception\ErrorExceptionHandle;
 use Trojanbox\Framework\Framework;
 use Application\Bootstrap;
 use Trojanbox\Framework\AutoLoader;
+
 require_once 'Framework' . DIRECTORY_SEPARATOR . 'Framework.php';
 
 class WebApplication extends Framework

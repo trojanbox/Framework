@@ -1,28 +1,36 @@
 <?php
 namespace Trojanbox\Mvc;
 
-class Controller
+abstract class ControllerAbstract
 {
 
-    protected $view;
+    protected $view = null;
 
-    final public function __construct()
-    {}
+    protected $layout = null;
 
+    public function __construct()
+    {
+        $this->layout = new Layout();
+        $this->view = new View();
+        $this->view->setLayout($this->layout);
+    }
+
+    public function loadLayoutConfig(array $config)
+    {
+        $this->layout->setConfig($config);
+    }
+    
     /**
      * 跳转到指定视图，输出最终的HTML
      */
     protected function render($address = null)
     {
-        $this->view = new View($address);
+    	$this->view->render($address);
     }
 
-    protected function display()
-    {}
-    
     /**
      * 跳转到指定页面
-     * 
+     *
      * @param string $url 指定的URL
      * @param number $time 等待时间
      */
@@ -39,11 +47,9 @@ class Controller
 
     /**
      * 返回到指定页面
-     * 
-     * @param number $number
-     *            后退次数
-     * @param number $time
-     *            等待时间
+     *
+     * @param number $number 后退次数
+     * @param number $time 等待时间
      */
     protected function refresh($number = 1, $time = 2000)
     {

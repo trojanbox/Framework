@@ -1,5 +1,5 @@
 <?php
-namespace Application\Event;
+namespace Test\Event;
 
 use Trojanbox\Event\EventAbstract;
 use Trojanbox\Package\PackageManager;

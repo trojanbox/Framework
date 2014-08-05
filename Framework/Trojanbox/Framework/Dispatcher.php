@@ -86,8 +86,8 @@ class Dispatcher implements DispatcherInterface
         unset($requestUritmp[$controllerTmpCount]);
         $requestUritmp = array_merge($requestUritmp);
 
-        $directory = implode(DIRECTORY_SEPARATOR, $requestUritmp);
-        if (! is_null($directory)) 
+        $directory = implode(DS, $requestUritmp);
+        if (! empty($directory)) 
             $directory .= DS;
 
         unset($requestUritmp);

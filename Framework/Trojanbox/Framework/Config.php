@@ -2,19 +2,24 @@
 namespace Trojanbox\Framework;
 
 use Trojanbox\Framework\Exception\ConfigException;
-class Config
+
+class Config extends FrameworkSupportAbstract
 {
+
     protected static $mapping = array();
-    
+
     /**
      * 加载配置文件
-     * 
-     * @param string $string
+     *
+     * @param string $string            
      * @return multitype:
      */
     public static function loader($directory, $key = null)
     {
-        if (!empty(self::$mapping[$directory])) {
+        
+        $directoryConfig = self::falsePathParse($directory);    
+        
+        if (! empty(self::$mapping[$directory])) {
             if (! is_null($key) && array_key_exists($key, self::$mapping[$directory])) {
                 return self::$mapping[$directory][$key];
             } else {
@@ -22,28 +27,21 @@ class Config
             }
             return self::$mapping[$directory];
         }
-            
-        $tmp = explode('.', $directory);
-        $mapping = $tmp[0];
-        unset($tmp[0]);
-        $newtmp = implode(DS, $tmp);
         
-        if ($mapping == 'System') {
-            $include = WORKSPACE . 'System' . DS . 'Config' . DS . $newtmp . '.php';
+        if ($directoryConfig['alias'] == 'System') {
+            $include = WORKSPACE . 'System' . DS . 'Config' . DS . $directoryConfig['directory'] . '.php';
         } else {
-            $include = APP_MODULE . $mapping . DS . 'Config' . DS . $newtmp . '.php';
+            $include = APP_MODULE . $directoryConfig['alias'] . DS . 'Config' . DS . $directoryConfig['directory'] . '.php';
         }
         
         if (! is_file($include)) {
-        	throw new ConfigException('Not found config file :' . $newtmp, E_WARNING);
+            throw new ConfigException('Not found config file :' . $directoryConfig['directory'], E_WARNING);
         }
         
         self::$mapping[$directory] = include $include;
         
         if (! is_null($key) && array_key_exists($key, self::$mapping[$directory])) {
             return self::$mapping[$directory][$key];
-        } else {
-            throw new ConfigException('Undefined key ' . $key);
         }
         return self::$mapping[$directory];
     }

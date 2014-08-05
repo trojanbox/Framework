@@ -1,7 +1,7 @@
 <?php
-namespace Application;
+namespace Test;
 
-use Application\Event\LoaderEvent;
+use Test\Event\LoaderEvent;
 use Trojanbox\WebApplication;
 use Trojanbox\Di\ServiceLocator;
 use Framework\Trojanbox\Framework\BootstrapInterface;
