@@ -34,6 +34,7 @@ class Layout extends FrameworkSupportAbstract
         if (isset($this->config['layout_switch']) && $this->config['layout_switch'] === true) {
         	$this->import($this->config['main']);
         }
+        
     }
     
     /**
@@ -59,6 +60,11 @@ class Layout extends FrameworkSupportAbstract
     	throw new ViewException('Ignoring Figure Output');
     }
     
+    public function setWidget(WidgetManager $widget)
+    {
+        $this->widget = $widget;
+    }
+    
     /**
      * 导入布局文件
      *
@@ -72,18 +78,5 @@ class Layout extends FrameworkSupportAbstract
             throw new ViewException('Not found layout page ' . $dirconfig['directory'] . '.');
         }
         require $layoutfile;
-    }
-    
-    public function __set($key, WidgetAbstract $value)
-    {
-        $this->widgetLists[$key] = $value;
-    }
-
-    public function __get($key)
-    {
-        if (array_key_exists($key, $this->widgetLists)) {
-            return $this->widgetLists[$key]->render();
-        }
-        throw new ViewException('Not found widget ' . $key . '.', E_ERROR);
     }
 }

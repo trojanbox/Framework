@@ -102,7 +102,7 @@ class ErrorExceptionHandle
                     break;
             }
             
-            $errorInfomation = '<html><body><p style=" font-size: 22px; font-weight: bolder;">Uncaught Exception Message: ' . $exception->getMessage();
+            $errorInfomation = '<html><body><p style="font-size: 22px; font-weight: bolder;">Uncaught Exception Message: ' . $exception->getMessage();
             $errorInfomation .= '<br /><font style="font-size: 18px;">>> Exception Class: ' . get_class($exception) . '</font>';
             $errorInfomation .= '<br /><font style="font-size: 18px;">>> Exception Code: ' . $errorCodeString . '</font>';
             $errorInfomation .= '<br /><font style="font-size: 18px;">>> ' . $exception->getFile() . ' [' . $exception->getLine() . ']' . '</font></p>';

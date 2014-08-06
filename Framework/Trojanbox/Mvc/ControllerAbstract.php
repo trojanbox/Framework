@@ -8,11 +8,16 @@ abstract class ControllerAbstract
 
     protected $layout = null;
 
+    protected $widget = null;
+    
     public function __construct()
     {
         $this->layout = new Layout();
         $this->view = new View();
+        $this->widget = new WidgetManager();
         $this->view->setLayout($this->layout);
+        $this->view->setWidget($this->widget);
+        $this->layout->setWidget($this->widget);
     }
 
     public function loadLayoutConfig(array $config)
