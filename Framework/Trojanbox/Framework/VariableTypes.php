@@ -1,11 +1,15 @@
 <?php
 namespace {
+
+    interface String {}
 	
-	interface String {}
-	interface Boolean {}
-	interface Integer {}
-	interface Double {}
-	interface Float {}
-	interface Recourse {}
-		
+    interface Boolean {}
+    
+    interface Integer {}
+    
+    interface Double {}
+    
+    interface Float {}
+    
+    interface Recourse {}	
 }

@@ -33,30 +33,25 @@ class Tools
         if (preg_match('/MSIE ([0-9].[0-9]{1,2})/i', $Agent, $version)) {
             $browserversion = $version[1];
             $browseragent = "Internet Explorer";
-        } else 
-            if (preg_match('/rv:([0-9]{1,2}.[0-9]+)/i', $Agent, $version)) {
-                $browserversion = $version[1];
-                $browseragent = "Internet Explorer";
-            } else 
-                if (preg_match('/Opera\/([0-9]{1,2}.[0-9]{1,2})/i', $Agent, $version)) {
-                    $browserversion = $version[1];
-                    $browseragent = "Opera";
-                } else 
-                    if (preg_match('/Firefox\/([0-9.]{1,5})/i', $Agent, $version)) {
-                        $browserversion = $version[1];
-                        $browseragent = "Firefox";
-                    } else 
-                        if (preg_match('/Chrome\/([0-9.]{1,3})/i', $Agent, $version)) {
-                            $browserversion = $version[1];
-                            $browseragent = "Chrome";
-                        } else 
-                            if (preg_match('/Safari\/([0-9.]{1,3})/i', $Agent, $version)) {
-                                $browseragent = "Safari";
-                                $browserversion = "";
-                            } else {
-                                $browserversion = "";
-                                $browseragent = "Unknown";
-                            }
+        } elseif (preg_match('/rv:([0-9]{1,2}.[0-9]+)/i', $Agent, $version)) {
+            $browserversion = $version[1];
+            $browseragent = "Internet Explorer";
+        } elseif (preg_match('/Opera\/([0-9]{1,2}.[0-9]{1,2})/i', $Agent, $version)) {
+            $browserversion = $version[1];
+            $browseragent = "Opera";
+        } elseif (preg_match('/Firefox\/([0-9.]{1,5})/i', $Agent, $version)) {
+            $browserversion = $version[1];
+            $browseragent = "Firefox";
+        } elseif (preg_match('/Chrome\/([0-9.]{1,3})/i', $Agent, $version)) {
+            $browserversion = $version[1];
+            $browseragent = "Chrome";
+        } elseif (preg_match('/Safari\/([0-9.]{1,3})/i', $Agent, $version)) {
+            $browseragent = "Safari";
+            $browserversion = "";
+        } else {
+            $browserversion = "";
+            $browseragent = "Unknown";
+        }
         return $browseragent . " " . $browserversion;
         exit();
     }
