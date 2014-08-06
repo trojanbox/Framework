@@ -12,9 +12,13 @@ date_default_timezone_set('Asia/Shanghai');
 
 session_start();
 
-// 当前目录 - 必备常量
-define('WORKSPACE', __DIR__ . DIRECTORY_SEPARATOR);
-include WORKSPACE . 'Framework' . DIRECTORY_SEPARATOR . 'Trojanbox' . DIRECTORY_SEPARATOR . 'WebApplication.php';
+define('DS', DIRECTORY_SEPARATOR);
+define('WORKSPACE', __DIR__ . DS);
+include WORKSPACE . 'Framework' . DS . 'Trojanbox' . DS . 'WebApplication.php';
 
 $app = new WebApplication();
+$app->bootstrap(function ($app) {
+    // 全局引导文件
+    // 优先级最高。在这之前框架仅加载了一些必要的类。
+});
 $app->run();

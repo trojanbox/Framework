@@ -78,7 +78,7 @@ class Framework
         
         return $this;
     }
-
+    
     /**
      * 执行
      *
@@ -90,6 +90,5 @@ class Framework
         $dispatcher->setRequestUri($_SERVER['REQUEST_URI']);
         $dispatcher->run();
         $dispatcher->dispatcher();
-        
     }
 }
